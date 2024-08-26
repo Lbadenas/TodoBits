@@ -3,7 +3,6 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
 import { Product } from '../product/products.entity';
@@ -13,23 +12,47 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true })
-  username: string;
+  @Column({
+    type: 'varchar',
+    length: 50,
+  })
+  name: string;
 
-  @Column({ unique: true })
+  @Column({
+    type: 'varchar',
+    length: 50,
+  })
+  lastname: string;
+
+  @Column({
+    type: 'varchar',
+    length: 50,
+    nullable: false,
+    unique: true,
+  })
   email: string;
 
-  @Column()
-  password: string;
+  @Column({
+    type: 'varchar',
+    length: 8,
+  })
+  dni: string;
 
-  @Column({ nullable: true })
-  profilePicture: string;
+  @Column({ type: 'varchar', length: 80 })
+  address: string;
+
+  @Column({ type: 'varchar' })
+  phone: string;
+
+  @Column({
+    type: 'varchar',
+    length: 130,
+    nullable: true,
+  })
+  profilePicture?: string;
 
   @CreateDateColumn()
   createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @OneToMany(() => Product, (product) => product.user)
   products: Product[];

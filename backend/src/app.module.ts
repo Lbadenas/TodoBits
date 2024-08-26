@@ -14,7 +14,6 @@ import { UsersModule } from './modules/users/users.module';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         const typeOrmConfig = configService.get('typeorm');
-        console.log('TypeORM Config:', typeOrmConfig);
         return typeOrmConfig;
       },
     }),

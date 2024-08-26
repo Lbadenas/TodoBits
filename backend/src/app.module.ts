@@ -4,22 +4,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeOrm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
-    // Cargar la configuración desde el archivo .env
-    ConfigModule.forRoot({
-      load: [typeOrmConfig],
-      isGlobal: true,
-    }),
-    // Configuración de TypeORM usando el ConfigService
+    ConfigModule.forRoot({ isGlobal: true, load: [typeOrmConfig] }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) =>
-        configService.get('typeorm'),
       inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        const typeOrmConfig = configService.get('typeorm');
+        console.log('TypeORM Config:', typeOrmConfig);
+        return typeOrmConfig;
+      },
     }),
-    // Otros módulos aquí
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

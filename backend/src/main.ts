@@ -6,5 +6,3 @@ async function bootstrap() {
   await app.listen(3005);
 }
 bootstrap();
-// eslint-disable-next-line prettier/prettier
-

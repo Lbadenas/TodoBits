@@ -10,3 +10,5 @@ export class AppController {
     return this.appService.getHello();
   }
 }
+// eslint-disable-next-line prettier/prettier
+

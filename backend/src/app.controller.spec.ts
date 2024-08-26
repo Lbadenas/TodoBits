@@ -20,3 +20,5 @@ describe('AppController', () => {
     });
   });
 });
+// eslint-disable-next-line prettier/prettier
+
